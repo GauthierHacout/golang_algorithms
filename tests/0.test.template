@@ -1,0 +1,34 @@
+
+import (
+"../algorithms"
+"../tester"
+"testing"
+)
+
+func Test( t *testing.T) {
+
+	test := tester.Tester{T:t}
+
+	tables := []struct {
+		input int
+		expected int
+	}{
+		{,},
+		{,},
+		{,},
+		{,},
+		{,},
+	}
+
+	for _, table := range tables {
+		// Put the function you want to test here
+		result := algorithms.
+		if result != table.expected {
+			test.Fail("Increasing array of (%v) was INCORRECT, got: %d, should be: %d.",
+				table.input, result, table.expected)
+		} else {
+			test.Sucess("Increasing array of (%v) was CORRECT, got : %d, should be: %d.",
+				table.input, result, table.expected)
+		}
+	}
+}
