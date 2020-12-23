@@ -3,7 +3,7 @@ package algorithms
 import "errors"
 
 // Return the K th smallest element that is inside a Binary Search Tree
-func KthSmallest(root *TreeNode, k int) (byte, error) {
+func KthSmallest(root *TreeNode, k int) (int, error) {
 	smallest, _ := searchKthSmallest(root, k, 0)
 	if smallest != nil {
 		return smallest.Val, nil

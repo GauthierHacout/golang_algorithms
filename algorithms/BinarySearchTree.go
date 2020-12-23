@@ -1,14 +1,14 @@
 package algorithms
 
-//Definition for a binary tree node.
+//Definition for a binary tree Node.
 type TreeNode struct {
-  Val byte
+  Val int
   Left *TreeNode
   Right *TreeNode
 }
 
 // Create a BST from a slice
-func BSTfromSlice(keys []byte) *TreeNode{
+func BSTfromSlice(keys []int) *TreeNode{
 	var root *TreeNode
 	for _, key := range keys {
 		root = insert(root, key)
@@ -16,11 +16,11 @@ func BSTfromSlice(keys []byte) *TreeNode{
 	return root
 }
 
-func newNode(x byte) *TreeNode {
+func newNode(x int) *TreeNode {
 	return &TreeNode{Val:x, Left:nil, Right:nil}
 }
 
-func insert(root *TreeNode, x byte) *TreeNode {
+func insert(root *TreeNode, x int) *TreeNode {
 	if root==nil {
 		return newNode(x)
 	}

@@ -15,9 +15,9 @@ func TestKthSmallestInBST(t *testing.T) {
 		input2		int
 		expected 	interface{}
 	}{
-		{algorithms.BSTfromSlice([]byte{3,1,4,2}), 1, 1},
-		{algorithms.BSTfromSlice([]byte{5,3,6,2,4,1}), 3, 3},
-		{algorithms.BSTfromSlice([]byte{5,3,6,2,4,1}), 67, "Not enough elements inside BST"},
+		{algorithms.BSTfromSlice([]int{3,1,4,2}), 1, 1},
+		{algorithms.BSTfromSlice([]int{5,3,6,2,4,1}), 3, 3},
+		{algorithms.BSTfromSlice([]int{5,3,6,2,4,1}), 67, "Not enough elements inside BST"},
 	}
 
 	for _, table := range tables {

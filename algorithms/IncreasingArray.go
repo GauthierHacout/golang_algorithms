@@ -1,6 +1,7 @@
 package algorithms
 
 import (
+	"math"
 	"sort"
 )
 
@@ -68,4 +69,75 @@ func makeArrayIncreasing1(a []int, b []int) int {
 	} else {
 		return ans
 	}
+}
+
+
+func makeArrayIncreasing(arr1 []int, arr2 []int) int {
+	arr2 = sortAndDedup(arr2)
+	m, n := len(arr1), len(arr2)
+	dp := [2][]int{}
+	for i := range dp {
+		dp[i] = make([]int, n+1)
+		if i == 0 {
+			for j := range dp[i] {
+				dp[i][j] = math.MaxInt64
+			}
+		}
+	}
+	minOps := math.MaxInt64
+	for i := m-1; i >= 0; i-- {
+		for j := n; j >= 0; j-- {
+			var prev int
+			if i == 0 {
+				prev = math.MinInt64
+			} else if j == n {
+				prev = arr1[i-1]
+			} else {
+				prev = arr2[j]
+			}
+			k := ceiling(arr2, prev)
+			dp[0][j] = math.MaxInt64
+			if arr1[i] > prev {
+				dp[0][j] = dp[1][n]
+			}
+			if k < n && dp[1][k] != math.MaxInt64 {
+				dp[0][j] = min(dp[0][j], 1+dp[1][k])
+			}
+			if i == 0 {
+				minOps = min(minOps, dp[0][j])
+			}
+		}
+		dp[0], dp[1] = dp[1], dp[0]
+	}
+	if minOps == math.MaxInt64 {
+		return -1
+	}
+	return minOps
+}
+
+func ceiling(A []int, target int) int {
+	n := len(A)
+	l, r := 0, n
+	for l < r {
+		m := l+(r-l)/2
+		if A[m] > target {
+			r = m
+		} else {
+			l = m+1
+		}
+	}
+	return l
+}
+
+func sortAndDedup(A []int) []int {
+	sort.Ints(A)
+	w, n := 0, len(A)
+	for i := range A {
+		A[w] = A[i]
+		w++
+		for i+1 < n && A[i+1] == A[i] {
+			i++
+		}
+	}
+	return A[:w]
 }
